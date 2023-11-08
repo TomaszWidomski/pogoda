@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  },
+  "scripts": {
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "setup-production": "npm install && npm run install-server && npm run install-client && npm run build-client",
+    "install-client": "cd ./client && npm install",
+    "install-server": "cd server && npm install",
+    "build-client": "cd ./client && npm run build",
+    "server": "cd ./server && node index.js --ignore client",
+    "client": "cd ./client && npm run preview"
+  }
+}
