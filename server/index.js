@@ -1,8 +1,16 @@
 import express from "express";
 import fetch from "node-fetch";
 import "dotenv/config";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import path from "path";
 const app = express();
 const PORT = 5000;
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// only when ready to deploy
+express.static(path.resolve(__dirname, "../client/dist"));
 
 app.all(["/api/v1/:city", "/api/v1/forecast/:city"], async (req, res, next) => {
   const url = `https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?format=json&city=${req.params.city}&polygon_threshold=0.0`;
